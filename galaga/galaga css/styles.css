@@ -1,14 +1,44 @@
-
-body {
-    margin: 0;
-    padding: 0;
+canvas {
+    box-shadow: black 20px 10px 50px;;
 }
+
+
 
 h1 {
     text-align: center;
+    margin: 0px;
+    margin-bottom: 10px;
+    font-size: 25px;
+    font-family: 'Helvetica'
+    
+}
+
+body {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   padding: 0px;
+   margin: 0px;
+   height: 100vh;
+   background-color: linear-gradient (
+    0deg,
+    rgb(97, 98, 99) 0%
+    rgba(0, 0, 0, 0) 100% 
+   );
+
 }
 
 ul {
     list-style-type: none;
     text-align: center;
 }
+
+.ship {
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-bottom: 50px solid #555;
+    
+}
+
