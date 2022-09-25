@@ -30,7 +30,7 @@ export default class EnemyControl {
         this.playerBulletControl = playerBulletControl;
 
         // this.enemyDiesSound = new Audio () - find enemy death sound (.wav)
-        // this.enemyDiesSound.volume = .5//in case volume is too loud
+        // this.enemyDiesSound.volume = .5//in case volume is too loud// add sound as updated feature
         
         this.createEnemies();
     }
@@ -45,13 +45,13 @@ export default class EnemyControl {
         this.fireBullet();
     }
     
-        resetTimerCountdown(){
+    resetTimerCountdown(){
             if(this.moveDownTimer <= 0){
                 this.moveDownTimer = this.moveDownDefaultTimer
             }
         }
 
-    decrementTimerCountdown (){
+    decrementMoveDownTimer (){
         if(this.currentDirection === EnemyMove.downLeft || 
            this.currentDirection === EnemyMove.downRight
         ) {
@@ -109,7 +109,7 @@ export default class EnemyControl {
             row.forEach((enemyNumber, enemyIndex) => {
                 if(enemyNumber > 0) {
                     this.enemyRows[rowIndex].push(
-                        new Enemy(enemyIndex* 50, rowIndex* 35, enemyNumber))
+                        new Enemy(enemyIndex* 40, rowIndex* 35, enemyNumber))
                     }
                 })
             })
@@ -129,9 +129,7 @@ export default class EnemyControl {
     collisionDetection() {
         this.enemyRows.forEach(enemyRow => {
            enemyRow.forEach((enemy, enemyIndex) => {
-            if(this.playerBulletControl.bulletHits(enemy)) {
-            this.enemyDiesSound.currentTime = 0;//starts fresh whenever an enemy dies
-            this.enemyDiesSound.play();
+            if(this.playerBulletControl.bulletHits(enemy)) { 
             enemyRow.splice(enemyIndex, 1);
         }
         
@@ -149,11 +147,14 @@ export default class EnemyControl {
             const allEnemies = this.enemyRows.flat();
             const enemyIndex = Math.floor(Math.random() * allEnemies.length);
             const enemy = allEnemies[enemyIndex];
-            this.enemyBulletControl.shoot(enemy.x, enemy.y, -3);
+            this.enemyBulletControl.shoot(enemy.x, enemy.y, -5);
             // console.log(enemyIndex);//enemy shooting the bullet on screen
         }
     }
 
+        bulletHits(sprite) {
+            return this.enemyRows.flat().some((enemy)=>enemy.bulletHits(sprite))
+        }
 
 
 
