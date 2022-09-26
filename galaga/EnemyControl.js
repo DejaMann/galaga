@@ -156,13 +156,4 @@ export default class EnemyControl {
             return this.enemyRows.flat().some((enemy)=>enemy.bulletHits(sprite))
         }
 
-
-
-
-  
-    
-
-
-            
-
 }
