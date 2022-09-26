@@ -6,22 +6,25 @@ export default class BulletControl {
 
 
 
-    constructor(canvas, maxBullets, bulletColor, soundEnabled){
-        this.canvas = canvas;
+    constructor(canvas, maxBullets, bulletColor)//add soundEnabled 
+        { this.canvas = canvas;
         this.maxBullets = maxBullets;
         this.bulletColor = bulletColor;
-        this.soundEnabled = soundEnabled;
+        // this.soundEnabled = soundEnabled;
 
         // this.shootSound = new Audio()
-        // this.shootSound.volume = 0.5;// find sound for shooting
+        // this.shootSound.volume = 0.5;// sound will be an updated feature
     }
 
     draw(ctx) {
-        this.bullets = this.bullets.filter((bullet) => bullet.y + bullet.width > 0)
-        this.bullets.forEach((bullet) => bullet.draw(ctx));
-        if(this.timeUntilNextBullet > 0 && bullet.y <= this.canvas.height){
+        if (this.timeUntilNextBullet > 0) {
             this.timeUntilNextBullet--;
         }
+        this.bullets = this.bullets.filter((bullet) => bullet.y + bullet.width > 0)
+        this.bullets.forEach((bullet) => bullet.draw(ctx));
+        // if(this.timeUntilNextBullet > 0 && this.bullet.y <= this.canvas.height){
+        //     this.timeUntilNextBullet--;
+        // }  
     }
 
     bulletHits(sprite){//sprite meaning if player or enemy hit
@@ -36,16 +39,12 @@ export default class BulletControl {
 
 
     shoot (x, y, velocity, timeUntilNextBullet = 0) {
-        if (this.timeUntilNextBullet <= 0 && this.bullets.length < this.maxBullets) {
-            const bullet = new BulletControl(this.canvas, x, y, velocity, this.bulletColor);
+        if (this.timeUntilNextBullet <= 0 && this.bullets.length < this.maxBullets) {//maxBullets = max # of bullets allowed on screen at a time
+        const bullet = new Bullet(this.canvas, x, y, velocity, this.bulletColor);
             this.bullets.push(bullet);
-            if(this.soundEnabled){
-                this.shootSound.currentTime = 0;
-                this.shootSound.play
-            }
+            //no sound for now//
             this.timeUntilNextBullet = timeUntilNextBullet;
         }
 
     }
 }
-

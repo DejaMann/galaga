@@ -7,7 +7,7 @@ export default class Player {
     constructor (canvas, velocity, bulletControl) {
         this.canvas = canvas;
         this.velocity = velocity;
-        this.bulletControl = bulletControl
+        this.bulletControl = bulletControl;
 
 
         this.x = this.canvas.width/2;
@@ -17,13 +17,13 @@ export default class Player {
         this.image = new Image();
         this.image.src = "./galaga_css/imgs/player.png"
         
-        document.addEventListener('keydown', this.keyDown)
-        document.addEventListener('keyup', this.keyUp)
+        document.addEventListener('keydown', this.keydown)
+        document.addEventListener('keyup', this.keyup)
     }
 
         draw(ctx) {
             if(this.shootPressed){
-                this.bulletControl.shoot(this.x + this.width/2, this.y, 4, 10)
+                this.bulletControl.shoot(this.x + this.width/2, this.y, 4, 10)//shoots from middle of spaceship, speed is 4 and gap between bullets is 10
             }
             this.move();
             this.hitWalls();
@@ -50,6 +50,7 @@ export default class Player {
             this.x += -this.velocity;
         }
     }
+    
 
     keydown = event => {
         if(event.code == 'ArrowRight'){
@@ -76,3 +77,12 @@ export default class Player {
     
     }
 }
+
+
+
+
+
+
+
+
+

@@ -5,4 +5,4 @@ const EnemyMove = {
     downRight: 3,
 };
 
-export default EnemyMove 
+export default EnemyMove;
